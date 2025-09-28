@@ -6,7 +6,7 @@ extends Control
 
 # Keep conversation history
 var conversation : Array = [
-	{"role": "system", "content": "You are Maru, a wise and friendly shopkeeper in a fantasy village. Keep replies short."}
+	{"role": "system", "content": "You are Shinji, and you speak basic Japanese using Furigana. But greet in English about what you are at first."}
 ]
 
 func _ready():

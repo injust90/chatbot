@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsdodxf0dd4d6"]
 
-[ext_resource type="Script" uid="uid://dgb5mvqlasvj5" path="res://ChatClient.gd" id="1_wtcfe"]
-[ext_resource type="Script" uid="uid://c1534g4qk3a21" path="res://input_box.gd" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://dgb5mvqlasvj5" path="res://ChatBot/ChatClient.gd" id="1_wtcfe"]
+[ext_resource type="Script" uid="uid://c1534g4qk3a21" path="res://ChatBot/input_box.gd" id="2_0e48y"]
 
 [node name="Node2D" type="Node2D"]
 
