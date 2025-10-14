@@ -40,7 +40,7 @@ func _on_text_submitted(text: String):
 		await get_tree().create_timer(0.6).timeout  # short delay to show feedback
 		load_flashcard(index)
 	else:
-		input_field.grab_focus()
+		input_field.clear()
 		feedback_label.text = "❌ Try again!"
 		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # red
 		busy = false  # allow retry immediately
