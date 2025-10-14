@@ -8,8 +8,12 @@ var current_word = ""
 var flashcards = [
 	{"image": "res://Art/cat.png", "word": "ねこ"},
 	{"image": "res://Art/dog.png", "word": "いぬ"},
-	{"image": "res://Art/mountain.png", "word": "やま"}
+	{"image": "res://Art/mountain.png", "word": "やま"},
+	{"image": "res://Art/まいにち.png", "word": "まいにち"},
+	{"image": "res://Art/ひと.png", "word": "ひと"},
+	{"image": "res://Art/いち.png", "word": "いち"}
 ]
+
 var index = 0
 var busy = false  # prevents multiple submits while feedback shows
 
