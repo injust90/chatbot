@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctg8kecvn6rja"]
+
+[sub_resource type="GDScript" id="GDScript_ajcy2"]
+script/source = "extends Node2D 
+
+var current_stroke : Array = []
+var strokes : Array = []
+
+var line_color : Color = Color(0, 0, 0)
+var line_width : float = 5.0
+
+func _input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			current_stroke = [event.position]
+		else:
+			if current_stroke.size() > 1:
+				strokes.append(current_stroke.duplicate())
+			current_stroke.clear()
+		 #   update()
+	elif event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_LEFT:
+		current_stroke.append(event.position)
+		# update()
+
+func _draw():
+	for stroke in strokes:
+		draw_stroke(stroke)
+	if current_stroke.size() > 1:
+		draw_stroke(current_stroke)
+
+func draw_stroke(stroke: Array):
+	for i in range(stroke.size() - 1):
+		draw_line(stroke[i], stroke[i + 1], line_color, line_width)
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_ajcy2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1150.0
+offset_bottom = 651.0

@@ -25,3 +25,6 @@ func _process(_delta):
 func _physics_process(_delta):
 	get_input()
 	move_and_slide()
+
+func _on_area_2d_body_entered(_body: Node2D) -> void:
+	print("Hello world!")

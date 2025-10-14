@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bokfnvpvn4yh1"]
+[gd_scene load_steps=17 format=3 uid="uid://bokfnvpvn4yh1"]
 
 [ext_resource type="Script" uid="uid://uxdgqqfcrgxg" path="res://Scenes/character_body_2d.gd" id="1_w731f"]
 [ext_resource type="Texture2D" uid="uid://brw743omq8bnx" path="res://Art/Mushroom_002.png" id="2_1eagj"]
+[ext_resource type="Texture2D" uid="uid://d77bvm7ql3bt" path="res://Art/MushroomNPC_001.png" id="3_i6njo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1eagj"]
 atlas = ExtResource("2_1eagj")
@@ -69,7 +70,46 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1eagj"]
 size = Vector2(125, 129)
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_c711f"]
+atlas = ExtResource("3_i6njo")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fl50i"]
+atlas = ExtResource("3_i6njo")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24gea"]
+atlas = ExtResource("3_i6njo")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6qkt"]
+atlas = ExtResource("3_i6njo")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbx52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c711f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fl50i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24gea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6qkt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6njo"]
+size = Vector2(173.25, 134)
+
+[node name="Player" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_w731f")
@@ -83,3 +123,24 @@ animation = &"run_down"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(544, 329)
 shape = SubResource("RectangleShape2D_1eagj")
+
+[node name="NPC" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="NPC"]
+position = Vector2(835, 336)
+scale = Vector2(2.375, 2.375)
+sprite_frames = SubResource("SpriteFrames_pbx52")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="NPC"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/RigidBody2D"]
+position = Vector2(1658, 668)
+shape = SubResource("RectangleShape2D_i6njo")
+
+[node name="Area2D" type="Area2D" parent="NPC"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC/Area2D"]
+position = Vector2(829, 334)
+shape = SubResource("RectangleShape2D_i6njo")
+
+[connection signal="body_entered" from="NPC/Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
