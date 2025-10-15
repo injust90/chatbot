@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dndop6bo6puss"]
+[gd_scene load_steps=3 format=3 uid="uid://dndop6bo6puss"]
 
 [ext_resource type="Script" uid="uid://bfqrjd4x1yukf" path="res://Scenes/flash_card.gd" id="1_c0pwt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0pwt"]
+bg_color = Color(0, 0.24328762, 0, 1)
 
 [node name="FlashCard" type="Node2D"]
 script = ExtResource("1_c0pwt")
@@ -10,6 +13,7 @@ offset_top = 515.0
 offset_right = 1152.0
 offset_bottom = 649.0
 theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_c0pwt")
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -18,11 +22,11 @@ offset_top = 25.0
 offset_right = 903.0
 offset_bottom = 492.0
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="."]
-offset_left = 395.0
-offset_top = 425.0
-offset_right = 762.0
-offset_bottom = 532.0
+offset_left = 391.0
+offset_top = 409.0
+offset_right = 758.0
+offset_bottom = 516.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
