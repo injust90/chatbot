@@ -6,12 +6,15 @@ extends Node2D
 
 var current_word = ""
 var flashcards = [
-	{"image": "res://Art/cat.png", "word": "ねこ"},
-	{"image": "res://Art/dog.png", "word": "いぬ"},
-	{"image": "res://Art/mountain.png", "word": "やま"},
+	#{"image": "res://Art/cat.png", "word": "ねこ"},
+	#{"image": "res://Art/dog.png", "word": "いぬ"},
+	#{"image": "res://Art/mountain.png", "word": "やま"},
+	#{"image": "res://Art/まいにち.png", "word": "まいにち"},
+	#{"image": "res://Art/ひと.png", "word": "ひと"},
+	#{"image": "res://Art/いち.png", "word": "いち"},
 	{"image": "res://Art/まいにち.png", "word": "まいにち"},
-	{"image": "res://Art/ひと.png", "word": "ひと"},
-	{"image": "res://Art/いち.png", "word": "いち"}
+	{"image": "res://Art/ことし.png", "word": "ことし"},
+	{"image": "res://Art/だす.png", "word": "だす"}
 ]
 
 var index = 0
