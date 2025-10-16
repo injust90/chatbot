@@ -3,6 +3,7 @@ extends Node2D
 @onready var image_display = $TextureRect
 @onready var input_field = $LineEdit
 @onready var feedback_label = $Label
+@onready var finish_screen = $FinishScreen
 
 var current_word = ""
 var flashcards = [
@@ -18,45 +19,74 @@ var flashcards = [
 	#{"image": "res://Art/こ.png", "word": "こ"},
 	#{"image": "res://Art/なか.png", "word": "なか"},
 	#{"image": "res://Art/ほん.png", "word": "ほん"},
-	#{"image": "res://Art/みえる.png", "word": "みえる"},
-	#{"image": "res://Art/くに.png", "word": "くに"},
-	#{"image": "res://Art/うえ.png", "word": "うえ"},
-	{"image": "res://Art/いく.png", "word": "いく"},
-	{"image": "res://Art/ちゅうがくせい.png", "word": "ちゅうがくせい"},
-	{"image": "res://Art/ぶん.png", "word": "ぶん"}
+	#{"image": "res://Art/いく.png", "word": "いく"},
+	#{"image": "res://Art/ちゅうがくせい.png", "word": "ちゅうがくせい"},
+	#{"image": "res://Art/ぶん.png", "word": "ぶん"},
+	#{"image": "res://Art/てんき.png", "word": "てんき"},
+	{"image": "res://Art/じゅう.png", "word": "じゅう"},
+	{"image": "res://Art/じかん.png", "word": "じかん"},
+	{"image": "res://Art/に.png", "word": "に"}
 ]
+
+var progress = {}
+var save_path = "user://progress.save"
 
 var tries = 0
 var index = 0
 var busy = false  # prevents multiple submits while feedback shows
 
 func _ready():
-	load_flashcard(index)
+	load_progress()
+	if progress.has(current_word) && progress[current_word] == false:
+		load_flashcard(index)
+	debug_save()
 	input_field.call_deferred("grab_focus")
 	input_field.connect("text_submitted", Callable(self, "_on_text_submitted"))
 	input_field.connect("focus_exited", Callable(self, "_refocus_lineedit"))
 
-func load_flashcard(i):
-	input_field.keep_editing_on_text_submit = true
-	var data = flashcards[i]
-	image_display.texture = load(data["image"])
-	current_word = data["word"]
-	input_field.text = ""
-	feedback_label.text = ""
-	busy = false
+func save_progress():
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	if file:
+		file.store_var(progress)
+		file.close()
+		print("Progress saved!")
 
-func _on_text_submitted(text: String):
-	#if busy:
-		#return  # ignore input while waiting
-	#busy = true
+func load_progress():
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		progress = file.get_var()
+		file.close()
+		print("Progress loaded: ", progress)	
+	else:
+		progress = {}
 		
+func load_flashcard(i):
+	var data
+	input_field.keep_editing_on_text_submit = true # keeps focus in window
+	if i < flashcards.size():
+		data = flashcards[i]
+		image_display.texture = load(data["image"])
+		current_word = data["word"]
+		input_field.text = ""
+		feedback_label.text = ""
+		busy = false
+	else:
+		image_display.texture = null
+		finish_screen.text = "Finished!"
+		input_field.text = ""
+		feedback_label.text = ""
+	
+func _on_text_submitted(text: String):		
 	if text == current_word:
+		index += 1
+		progress[current_word] = true # mark as completed
+		save_progress() #save to file
 		feedback_label.text = "✅ Correct!"
 		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # green
-		index = (index + 1) % flashcards.size()		
 		await get_tree().create_timer(0.6).timeout  # short delay to show feedback
 		load_flashcard(index)
-		tries = 0
+		tries = 0 # tries before hint system kicks in
+		
 	else:
 		input_field.clear()
 		feedback_label.text = "❌ Try again!"
@@ -67,4 +97,27 @@ func _on_text_submitted(text: String):
 		tries += 1
 	
 	if tries == 3:
-		input_field.text = flashcards[index]["word"]
+		input_field.text = flashcards[index]["word"]	
+
+func debug_save():
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		var data = file.get_var()
+		file.close()
+		print("🧠 Save contents:", data)
+	else:
+		print("⚠️ No save file found at:", ProjectSettings.globalize_path(save_path))
+
+
+func _on_reset_button_pressed() -> void:
+	if FileAccess.file_exists(save_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
+		progress.clear()
+		index = 0
+		load_flashcard(index)
+		feedback_label.text = "Progress reset!"
+		feedback_label.add_theme_color_override("font_color", Color(1, 0.5, 0))
+
+	else:
+		feedback_label.text = "No saved progress to reset."
+		feedback_label.add_theme_color_override("font_color", Color(1, 0.5, 0))
