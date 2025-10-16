@@ -60,6 +60,15 @@ func load_progress():
 	else:
 		progress = {}
 		
+func debug_save():
+	if FileAccess.file_exists(save_path):
+		var file = FileAccess.open(save_path, FileAccess.READ)
+		var data = file.get_var()
+		file.close()
+		print("🧠 Save contents:", data)
+	else:
+		print("⚠️ No save file found at:", ProjectSettings.globalize_path(save_path))
+		
 func load_flashcard(i):
 	var data
 	input_field.keep_editing_on_text_submit = true # keeps focus in window
@@ -98,16 +107,6 @@ func _on_text_submitted(text: String):
 	
 	if tries == 3:
 		input_field.text = flashcards[index]["word"]	
-
-func debug_save():
-	if FileAccess.file_exists(save_path):
-		var file = FileAccess.open(save_path, FileAccess.READ)
-		var data = file.get_var()
-		file.close()
-		print("🧠 Save contents:", data)
-	else:
-		print("⚠️ No save file found at:", ProjectSettings.globalize_path(save_path))
-
 
 func _on_reset_button_pressed() -> void:
 	if FileAccess.file_exists(save_path):
