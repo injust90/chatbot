@@ -18,9 +18,12 @@ var flashcards = [
 	#{"image": "res://Art/こ.png", "word": "こ"},
 	#{"image": "res://Art/なか.png", "word": "なか"},
 	#{"image": "res://Art/ほん.png", "word": "ほん"},
-	{"image": "res://Art/みえる.png", "word": "みえる"},
-	{"image": "res://Art/くに.png", "word": "くに"},
-	{"image": "res://Art/うえ.png", "word": "うえ"}
+	#{"image": "res://Art/みえる.png", "word": "みえる"},
+	#{"image": "res://Art/くに.png", "word": "くに"},
+	#{"image": "res://Art/うえ.png", "word": "うえ"},
+	{"image": "res://Art/いく.png", "word": "いく"},
+	{"image": "res://Art/ちゅうがくせい.png", "word": "ちゅうがくせい"},
+	{"image": "res://Art/ぶん.png", "word": "ぶん"}
 ]
 
 var tries = 0
@@ -58,6 +61,8 @@ func _on_text_submitted(text: String):
 		input_field.clear()
 		feedback_label.text = "❌ Try again!"
 		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # red
+		await get_tree().create_timer(1.0).timeout
+		feedback_label.text = ""
 		busy = false  # allow retry immediately
 		tries += 1
 	
