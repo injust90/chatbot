@@ -37,8 +37,8 @@ var busy = false  # prevents multiple submits while feedback shows
 
 func _ready():
 	load_progress()
-	if progress.has(current_word) && progress[current_word] == false:
-		load_flashcard(index)
+	save_progress()
+	load_flashcard(index)
 	debug_save()
 	input_field.call_deferred("grab_focus")
 	input_field.connect("text_submitted", Callable(self, "_on_text_submitted"))
@@ -49,7 +49,7 @@ func save_progress():
 	if file:
 		file.store_var(progress)
 		file.close()
-		print("Progress saved!")
+		print("Progress saved!")		
 
 func load_progress():
 	if FileAccess.file_exists(save_path):
