@@ -22,9 +22,18 @@ var flashcards = [
 	#{"image": "res://Art/ちゅうがくせい.png", "word": "ちゅうがくせい"},
 	#{"image": "res://Art/ぶん.png", "word": "ぶん"},
 	#{"image": "res://Art/てんき.png", "word": "てんき"},
-	{"image": "res://Art/じゅう.png", "word": "じゅう"},
-	{"image": "res://Art/じかん.png", "word": "じかん"},
-	{"image": "res://Art/に.png", "word": "に"}
+	#{"image": "res://Art/じゅう.png", "word": "じゅう"},
+	#{"image": "res://Art/じかん.png", "word": "じかん"},
+	#{"image": "res://Art/に.png", "word": "に"},
+	#{"image": "res://Art/ごぜん.png", "word": "ごぜん"},
+	#{"image": "res://Art/さん.png", "word": "さん"},
+	#{"image": "res://Art/かのじょ.png", "word": "かのじょ"}
+	#{"image": "res://Art/ごご.png", "word": "ごご"},
+	#{"image": "res://Art/ちいさい.png", "word": "ちいさい"},
+	#{"image": "res://Art/いれる.png", "word": "いれる"},
+	{"image": "res://Art/だいがく.png", "word": "だいがく"},
+	{"image": "res://Art/じょうげ.png", "word": "じょうげ"},
+	{"image": "res://Art/あさ.png", "word": "あさ"},
 ]
 
 var current_word = ""
