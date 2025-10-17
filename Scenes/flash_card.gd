@@ -5,7 +5,6 @@ extends Node2D
 @onready var feedback_label = $Label
 @onready var finish_screen = $FinishScreen
 
-var current_word = ""
 var flashcards = [
 	#{"image": "res://Art/cat.png", "word": "ねこ"},
 	#{"image": "res://Art/dog.png", "word": "いぬ"},
@@ -28,12 +27,11 @@ var flashcards = [
 	{"image": "res://Art/に.png", "word": "に"}
 ]
 
+var current_word = ""
 var progress = {}
 var save_path = "user://progress.save"
-
 var tries = 0
 var index = 0
-var busy = false  # prevents multiple submits while feedback shows
 
 func _ready():
 	load_progress()
@@ -69,26 +67,29 @@ func debug_save():
 	else:
 		print("⚠️ No save file found at:", ProjectSettings.globalize_path(save_path))
 		
+# Loads flashcard into the screen
 func load_flashcard(i):
-	var data
 	input_field.keep_editing_on_text_submit = true # keeps focus in window
-	if i < flashcards.size():
-		data = flashcards[i]
-		image_display.texture = load(data["image"])
-		current_word = data["word"]
-		input_field.text = ""
-		feedback_label.text = ""
-		busy = false
-	else:
-		image_display.texture = null
-		finish_screen.text = "Finished!"
-		input_field.text = ""
-		feedback_label.text = ""
+	# If number of cards is still less than index AND cards are unanswered
+	#if i < flashcards.size() && progress[current_word] == false:
+	image_display.texture = load(flashcards[i]["image"])
+	current_word = flashcards[i]["word"]
+	input_field.text = ""
+	feedback_label.text = ""
+	# initialize the value in the dictionary for saving
+	progress[current_word] = progress.get(current_word, 0)
+	index = (index + 1) % flashcards.size()
+	#else:
+		#image_display.texture = null
+		#finish_screen.text = "Finished!"
+		#input_field.text = ""
+		#feedback_label.text = ""
 	
 func _on_text_submitted(text: String):		
 	if text == current_word:
-		index += 1
-		progress[current_word] = true # mark as completed
+		index = (index + 1) % flashcards.size()
+		#progress[current_word] = true # mark as completed
+		progress[current_word] += 1
 		save_progress() #save to file
 		feedback_label.text = "✅ Correct!"
 		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # green
@@ -102,7 +103,6 @@ func _on_text_submitted(text: String):
 		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # red
 		await get_tree().create_timer(1.0).timeout
 		feedback_label.text = ""
-		busy = false  # allow retry immediately
 		tries += 1
 	
 	if tries == 3:
