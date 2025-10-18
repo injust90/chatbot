@@ -1,0 +1,33 @@
+extends Resource
+class_name FlashcardsDictionary
+
+@export var flashdict = [
+	{"image": "res://Art/みえる.png", "word": "みえる", "en-word": "to see"},
+	{"image": "res://Art/くに.png", "word": "くに", "en-word": "country"},
+	{"image": "res://Art/まいにち.png", "word": "まいにち", "en-word": "everyday"},
+	{"image": "res://Art/ひと.png", "word": "ひと", "en-word": "person"},
+	{"image": "res://Art/いち.png", "word": "いち", "en-word": "one"},
+	{"image": "res://Art/ことし.png", "word": "ことし", "en-word": "this year"},
+	{"image": "res://Art/だす.png", "word": "だす", "en-word": "to take out"},
+	{"image": "res://Art/こ.png", "word": "こ", "en-word": "child"},
+	{"image": "res://Art/なか.png", "word": "なか", "en-word": "inside"},
+	{"image": "res://Art/ほん.png", "word": "ほん", "en-word": "book"},
+	{"image": "res://Art/いく.png", "word": "いく", "en-word": "go"},
+	{"image": "res://Art/ちゅうがくせい.png", "word": "ちゅうがくせい", "en-word": "junior high student"},
+	{"image": "res://Art/ぶん.png", "word": "ぶん", "en-word": "minute"},
+	{"image": "res://Art/てんき.png", "word": "てんき", "en-word": "weather"},
+	{"image": "res://Art/じゅう.png", "word": "じゅう", "en-word": "ten"},
+	{"image": "res://Art/じかん.png", "word": "じかん", "en-word": "time"},
+	{"image": "res://Art/に.png", "word": "に", "en-word": "2"},
+	{"image": "res://Art/ごぜん.png", "word": "ごぜん", "en-word": "AM"},
+	{"image": "res://Art/さん.png", "word": "さん", "en-word": "chief"},
+	{"image": "res://Art/かのじょ.png", "word": "かのじょ", "en-word": "that girl"},
+	{"image": "res://Art/ごご.png", "word": "ごご", "en-word": "PM"},
+	{"image": "res://Art/ちいさい.png", "word": "ちいさい", "en-word": "small"},
+	{"image": "res://Art/いれる.png", "word": "いれる", "en-word": "to put in"},
+	{"image": "res://Art/だいがく.png", "word": "だいがく", "en-word": "college"},
+	{"image": "res://Art/じょうげ.png", "word": "じょうげ", "en-word": "top and bottom"},
+	{"image": "res://Art/なに.png", "word": "なに", "en-word" : "what"},
+	{"image": "res://Art/くる.png", "word": "くる", "en-word" : "to come"},
+	{"image": "res://Art/げつようび.png", "word": "げつようび", "en-word" : "Monday"},
+]
