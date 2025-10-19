@@ -17,11 +17,13 @@ var save_path = "user://progress.save"
 var tries = 0
 var index = 0
 var hint = ""
+var highest_error = 0
 
 func _ready():
 	load_progress()
 	save_progress()
-	load_flashcard(index)
+	highest_error = progress.find_key(progress.values().max())
+	load_flashcard(highest_error)
 	debug_save()
 	input_field.call_deferred("grab_focus")
 	input_field.connect("text_submitted", Callable(self, "_on_text_submitted"))
@@ -33,6 +35,7 @@ func save_progress():
 		file.store_var(progress)
 		file.close()
 		print("Progress saved!")
+		
 
 func load_progress():
 	if FileAccess.file_exists(save_path):
@@ -60,8 +63,8 @@ func load_flashcard(i):
 	input_field.text = ""
 	feedback_label.text = ""
 	# initialize the value in the dictionary for saving
-	progress[current_word] = progress.get(current_word, 0)
-
+	progress[i] = progress.get(current_word, 0)
+	
 	english_word.set_text(flashcards.flashdict[i]["en-word"])
 	audio_stream.stream = AudioStreamWAV.load_from_file(flashcards.flashdict[i]["voice"])
 	
@@ -70,15 +73,15 @@ func load_flashcard(i):
 func _on_text_submitted(text: String):
 	if text == current_word:
 		index = (index + 1) % flashcards.flashdict.size()
-		progress[current_word] += 1
 		save_progress() #save to file
 		feedback_label.text = "✅ Correct!"
 		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # green
-		load_flashcard(index)
+		load_flashcard(highest_error)
 		tries = 0 # tries before hint system kicks in
 		hint = "" # hint set back to blank
 
 	else:
+		progress[highest_error] += 1
 		input_field.text = ""
 		feedback_label.text = "❌ Try again!"
 		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # red
@@ -87,7 +90,7 @@ func _on_text_submitted(text: String):
 
 	if tries > 0:
 		var hint_letter = ""
-		hint_letter = flashcards.flashdict[index]["word"][tries - 1]
+		hint_letter = flashcards.flashdict[highest_error]["word"][tries - 1]
 		hint += hint_letter
 		print(hint)
 		input_field.text = hint
