@@ -9,7 +9,7 @@ extends Node2D
 @onready var english_word = $EnglishWord
 @onready var audio_stream = $AudioStreamPlayer
 
-var voice = AudioServer.get_bus_index("Master")
+var voice = AudioServer.get_bus_index("Voice")
 
 var current_word = ""
 var progress = {}
