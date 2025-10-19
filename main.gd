@@ -9,7 +9,7 @@ extends Node2D
 @onready var english_word = $EnglishWord
 @onready var audio_stream = $AudioStreamPlayer
 
-var voice = AudioServer.get_bus_index("Master")
+var voice = AudioServer.get_bus_index("Voice")
 
 var current_word = ""
 var progress = {}
@@ -31,17 +31,17 @@ func save_progress():
 	if file:
 		file.store_var(progress)
 		file.close()
-		print("Progress saved!")		
+		print("Progress saved!")
 
 func load_progress():
 	if FileAccess.file_exists(save_path):
 		var file = FileAccess.open(save_path, FileAccess.READ)
 		progress = file.get_var()
 		file.close()
-		print("Progress loaded: ", progress)	
+		print("Progress loaded: ", progress)
 	else:
 		progress = {}
-		
+
 func debug_save():
 	if FileAccess.file_exists(save_path):
 		var file = FileAccess.open(save_path, FileAccess.READ)
@@ -50,7 +50,7 @@ func debug_save():
 		print("🧠 Save contents:", data)
 	else:
 		print("⚠️ No save file found at:", ProjectSettings.globalize_path(save_path))
-		
+
 # Loads flashcard into the screen
 func load_flashcard(i):
 	input_field.keep_editing_on_text_submit = true # keeps focus in window
@@ -70,24 +70,23 @@ func load_flashcard(i):
 	english_word.set_text(flashcards.flashdict[i]["en-word"])
 	audio_stream.stream = AudioStreamWAV.load_from_file(flashcards.flashdict[i]["voice"])
 	audio_stream.play()
-	
-func _on_text_submitted(text: String):		
+
+func _on_text_submitted(text: String):
 	if text == current_word:
 		index = (index + 1) % flashcards.flashdict.size()
-		#progress[current_word] = true # mark as completed
 		progress[current_word] += 1
 		save_progress() #save to file
 		feedback_label.text = "✅ Correct!"
 		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # green
 		load_flashcard(index)
 		tries = 0 # tries before hint system kicks in
-		
+
 	else:
 		feedback_label.text = "❌ Try again!"
 		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # red
 		feedback_label.text = ""
 		tries += 1
-	
+
 	if tries > 0:
 		var hint_letter = ""
 		hint_letter = flashcards.flashdict[index]["word"][tries - 1]
