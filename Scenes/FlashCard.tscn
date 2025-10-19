@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dndop6bo6puss"]
+[gd_scene load_steps=7 format=3 uid="uid://dndop6bo6puss"]
 
 [ext_resource type="Script" uid="uid://s5jwx7vrpehx" path="res://main.gd" id="1_c0pwt"]
 [ext_resource type="Script" uid="uid://b0mkq00ughvgp" path="res://MyDictionary.gd" id="2_rwhx2"]
+[ext_resource type="Script" uid="uid://bblpyabqm71ar" path="res://Scenes/volume_slider.gd" id="3_7db13"]
 
 [sub_resource type="Resource" id="Resource_rwhx2"]
 script = ExtResource("2_rwhx2")
@@ -61,5 +62,21 @@ offset_right = 366.0
 offset_bottom = 521.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = 1.0
+autoplay = true
+bus = &"Voice"
+
+[node name="volume_slider" type="HSlider" parent="."]
+offset_left = 1139.0
+offset_top = 433.0
+offset_right = 1271.0
+offset_bottom = 472.0
+rotation = 3.1415927
+tooltip_text = "Audio Slider"
+step = 0.001
+script = ExtResource("3_7db13")
+bus_name = "Voice"
 
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

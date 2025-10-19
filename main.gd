@@ -7,6 +7,9 @@ extends Node2D
 @onready var feedback_label = $Label
 @onready var finish_screen = $FinishScreen
 @onready var english_word = $EnglishWord
+@onready var audio_stream = $AudioStreamPlayer
+
+var voice = AudioServer.get_bus_index("Master")
 
 var current_word = ""
 var progress = {}
@@ -65,6 +68,8 @@ func load_flashcard(i):
 		#input_field.text = ""
 		#feedback_label.text = ""
 	english_word.set_text(flashcards.flashdict[i]["en-word"])
+	audio_stream.stream = AudioStreamWAV.load_from_file(flashcards.flashdict[i]["voice"])
+	audio_stream.play()
 	
 func _on_text_submitted(text: String):		
 	if text == current_word:
