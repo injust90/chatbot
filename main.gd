@@ -70,6 +70,7 @@ func load_flashcard(i):
 		#feedback_label.text = ""
 	english_word.set_text(flashcards.flashdict[i]["en-word"])
 	audio_stream.stream = AudioStreamWAV.load_from_file(flashcards.flashdict[i]["voice"])
+	
 	audio_stream.play()
 
 func _on_text_submitted(text: String):

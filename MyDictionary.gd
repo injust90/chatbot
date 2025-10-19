@@ -30,8 +30,6 @@ class_name FlashcardsDictionary
 	#{"voice": "res://Voice/じょうげ.wav", "image": "res://Art/じょうげ.png", "word": "じょうげ", "en-word": "top and bottom"},
 	#{"voice": "res://Voice/なに.wav", "image": "res://Art/なに.png", "word": "なに", "en-word" : "what"},
 	#{"voice": "res://Voice/くる.wav", "image": "res://Art/くる.png", "word": "くる", "en-word" : "to come"},
-	#{"voice": "res://Voice/げつようび.wav", "image": "res://Art/げつようび.png", "word": "げつようび", "en-word" : "Monday"}
-	{"voice": "res://Voice/はなし.wav", "image": "res://Art/はなし.png", "word": "はなし", "en-word": "speak"},
 	{"voice": "res://Voice/やま.wav", "image": "res://Art/やま.png", "word": "やま", "en-word": "mountain"},
 	{"voice": "res://Voice/たかい.wav", "image": "res://Art/たかい.png", "word": "たかい", "en-word": "high"},
 	{"voice": "res://Voice/いま.wav", "image": "res://Art/いま.png", "word": "いま", "en-word": "now"},
