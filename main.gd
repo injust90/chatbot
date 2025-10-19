@@ -55,19 +55,13 @@ func debug_save():
 # Loads flashcard into the screen
 func load_flashcard(i):
 	input_field.keep_editing_on_text_submit = true # keeps focus in window
-	# If number of cards is still less than index AND cards are unanswered
-	#if i < flashcards.size() && progress[current_word] == false:
 	image_display.texture = load(flashcards.flashdict[i]["image"])
 	current_word = flashcards.flashdict[i]["word"]
 	input_field.text = ""
 	feedback_label.text = ""
 	# initialize the value in the dictionary for saving
 	progress[current_word] = progress.get(current_word, 0)
-	#else:
-		#image_display.texture = null
-		#finish_screen.text = "Finished!"
-		#input_field.text = ""
-		#feedback_label.text = ""
+
 	english_word.set_text(flashcards.flashdict[i]["en-word"])
 	audio_stream.stream = AudioStreamWAV.load_from_file(flashcards.flashdict[i]["voice"])
 	
