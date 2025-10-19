@@ -79,4 +79,12 @@ step = 0.001
 script = ExtResource("3_7db13")
 bus_name = "Voice"
 
+[node name="Label2" type="Label" parent="."]
+offset_left = 1050.0
+offset_top = 389.0
+offset_right = 1091.0
+offset_bottom = 412.0
+theme_override_colors/font_color = Color(0.096204735, 0.09620475, 0.096204735, 1)
+text = "Audio"
+
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]
