@@ -74,7 +74,6 @@ func load_flashcard(i):
 func _on_text_submitted(text: String):
 	if text == current_word:
 		index = (index + 1) % flashcards.flashdict.size()
-		#progress[current_word] = true # mark as completed
 		progress[current_word] += 1
 		save_progress() #save to file
 		feedback_label.text = "✅ Correct!"

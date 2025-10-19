@@ -14,5 +14,5 @@ func _ready() -> void:
 
 func _volume_changer(slider_value: float) -> void:
 	# @Kawabaud: unit slider value->(0-1), inv it, & apply
-	var unit := 1.0 - (slider_value / MAX_VOL_DB)
+	var unit = 1.0 - (slider_value / MAX_VOL_DB)
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(unit))
