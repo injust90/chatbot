@@ -10,7 +10,6 @@ func _ready() -> void:
 	value_changed.connect(_volume_changer)
 
 	# @Kawabaud: trans curr db linear 0-1, then scale slider range 0-100 & invert
-	value = MAX_VOL_DB * (1.0 - db_to_linear(AudioServer.get_bus_volume_db(bus_index)))
 
 func _volume_changer(slider_value: float) -> void:
 	# @Kawabaud: unit slider value->(0-1), inv it, & apply

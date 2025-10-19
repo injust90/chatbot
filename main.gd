@@ -16,6 +16,7 @@ var progress = {}
 var save_path = "user://progress.save"
 var tries = 0
 var index = 0
+var hint = ""
 
 func _ready():
 	load_progress()
@@ -80,8 +81,10 @@ func _on_text_submitted(text: String):
 		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # green
 		load_flashcard(index)
 		tries = 0 # tries before hint system kicks in
+		hint = "" # hint set back to blank
 
 	else:
+		input_field.text = ""
 		feedback_label.text = "❌ Try again!"
 		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # red
 		feedback_label.text = ""
@@ -90,7 +93,9 @@ func _on_text_submitted(text: String):
 	if tries > 0:
 		var hint_letter = ""
 		hint_letter = flashcards.flashdict[index]["word"][tries - 1]
-		input_field.text += hint_letter
+		hint += hint_letter
+		print(hint)
+		input_field.text = hint
 
 func _on_reset_button_pressed() -> void:
 	if FileAccess.file_exists(save_path):
