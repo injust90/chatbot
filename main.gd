@@ -18,11 +18,11 @@ var tries = 0
 var index = 0
 var hint = ""
 var highest_error = 0
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	load_progress()
 	save_progress()
-	highest_error = progress.find_key(progress.values().max())
 	load_flashcard(highest_error)
 	debug_save()
 	input_field.call_deferred("grab_focus")
@@ -57,18 +57,26 @@ func debug_save():
 
 # Loads flashcard into the screen
 func load_flashcard(i):
+	#For debugging only
+	print("Current save state: ", progress)
+	
 	input_field.keep_editing_on_text_submit = true # keeps focus in window
 	image_display.texture = load(flashcards.flashdict[i]["image"])
 	current_word = flashcards.flashdict[i]["word"]
 	input_field.text = ""
 	feedback_label.text = ""
-	# initialize the value in the dictionary for saving
-	progress[i] = progress.get(current_word, 0)
+
+	load_flashcard_index()
 	
 	english_word.set_text(flashcards.flashdict[i]["en-word"])
 	audio_stream.stream = AudioStreamWAV.load_from_file(flashcards.flashdict[i]["voice"])
 	
 	audio_stream.play()
+	
+# Indexes all the cards into save progress
+func load_flashcard_index():
+	for i in flashcards.flashdict.size():
+		progress[i] = progress.get(current_word, 0)
 
 func _on_text_submitted(text: String):
 	if text == current_word:
@@ -76,9 +84,14 @@ func _on_text_submitted(text: String):
 		save_progress() #save to file
 		feedback_label.text = "✅ Correct!"
 		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # green
+		
+		if progress.values().max() == 0:
+			highest_error = rng.randi_range(0, progress.size() - 1)
+		
 		load_flashcard(highest_error)
 		tries = 0 # tries before hint system kicks in
 		hint = "" # hint set back to blank
+		highest_error = 0
 
 	else:
 		progress[highest_error] += 1
@@ -87,6 +100,7 @@ func _on_text_submitted(text: String):
 		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # red
 		feedback_label.text = ""
 		tries += 1
+		highest_error = progress.find_key(progress.values().max())
 
 	if tries > 0:
 		var hint_letter = ""
@@ -101,6 +115,7 @@ func _on_reset_button_pressed() -> void:
 		progress.clear()
 		index = 0
 		load_flashcard(index)
+		highest_error = 0
 		feedback_label.text = "Progress reset!"
 		feedback_label.add_theme_color_override("font_color", Color(1, 0.5, 0))
 
