@@ -25,6 +25,7 @@ func _ready():
 	load_progress()
 	save_progress()
 	# Initialize the card with the highest error
+	load_flashcard_index()	
 	load_flashcard(highest_error)
 	debug_save()
 	input_field.call_deferred("grab_focus")
@@ -67,7 +68,6 @@ func load_flashcard(i):
 	current_word = flashcards.flashdict[i]["word"]
 	input_field.text = ""
 	feedback_label.text = ""
-	load_flashcard_index()	
 	# English hint system
 	english_word.set_text(flashcards.flashdict[i]["en-word"])
 	# Audio/Voices
@@ -106,7 +106,7 @@ func _on_text_submitted(text: String):
 		print ("index ", index)
 
 	else:
-		progress[highest_error] += 1
+		progress[index] += 1
 		input_field.text = ""
 		feedback_label.text = "❌ Try again!"
 		feedback_label.add_theme_color_override("font_color", Color(1, 0, 0))  # red

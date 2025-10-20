@@ -40,11 +40,16 @@ class_name FlashcardsDictionary
 	#{"voice": "res://Voice/先生.wav", "image": "res://Art/先生.png", "word": "せんせい", "en-word": "teacher"},
 	#{"voice": "res://Voice/四.wav", "image": "res://Art/四.png", "word": "よん", "en-word": "four"},
 	#{"voice": "res://Voice/外国.wav", "image": "res://Art/外国.png", "word": "がいこく", "en-word": "country"},
-	#{"voice": "res://Voice/男の子.wav", "image": "res://Art/男の子.png", "word": "おとこのこ", "en-word": "country"},
+	#{"voice": "res://Voice/男の子.wav", "image": "res://Art/男の子.png", "word": "おとこのこ", "en-word": "country"},	
+	#{"voice": "res://Voice/九.wav", "image": "res://Art/九.png", "word": "きゅう", "en-word": "nine"},
+	#{"voice": "res://Voice/英語.wav", "image": "res://Art/英語.png", "word": "えいご", "en-word": "english"},
+	#{"voice": "res://Voice/新聞.wav", "image": "res://Art/新聞.png", "word": "しんぶん", "en-word": "newspaper"},
+	#{"voice": "res://Voice/東.wav", "image": "res://Art/東.png", "word": "ひがし", "en-word": "east"},
+	#{"voice": "res://Voice/川.wav", "image": "res://Art/川.png", "word": "かわ", "en-word": "river"},
 	
-	{"voice": "res://Voice/九.wav", "image": "res://Art/九.png", "word": "きゅう", "en-word": "nine"},
-	{"voice": "res://Voice/英語.wav", "image": "res://Art/英語.png", "word": "えいご", "en-word": "english"},
-	{"voice": "res://Voice/新聞.wav", "image": "res://Art/新聞.png", "word": "しんぶん", "en-word": "newspaper"},
-	{"voice": "res://Voice/東.wav", "image": "res://Art/東.png", "word": "ひがし", "en-word": "east"},
-	{"voice": "res://Voice/川.wav", "image": "res://Art/川.png", "word": "かわ", "en-word": "river"},
+	{"voice": "res://Voice/水.wav", "image": "res://Art/水.png", "word": "みず", "en-word": "water"},
+	{"voice": "res://Voice/天の.wav", "image": "res://Art/天の.png", "word": "あめの", "en-word": "heavenly"},
+	{"voice": "res://Voice/水.wav", "image": "res://Art/水.png", "word": "みず", "en-word": "water"},
+	{"voice": "res://Voice/八.wav", "image": "res://Art/八.png", "word": "はち", "en-word": "eight"},
+	{"voice": "res://Voice/食べる.wav", "image": "res://Art/食べる.png", "word": "たべる", "en-word": "to eat"}
 ]
