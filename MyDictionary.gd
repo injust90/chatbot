@@ -46,10 +46,15 @@ class_name FlashcardsDictionary
 	#{"voice": "res://Voice/新聞.wav", "image": "res://Art/新聞.png", "word": "しんぶん", "en-word": "newspaper"},
 	#{"voice": "res://Voice/東.wav", "image": "res://Art/東.png", "word": "ひがし", "en-word": "east"},
 	#{"voice": "res://Voice/川.wav", "image": "res://Art/川.png", "word": "かわ", "en-word": "river"},
+	#{"voice": "res://Voice/水.wav", "image": "res://Art/水.png", "word": "みず", "en-word": "water"},
+	#{"voice": "res://Voice/天の.wav", "image": "res://Art/天の.png", "word": "あめの", "en-word": "heavenly"},
+	#{"voice": "res://Voice/木.wav", "image": "res://Art/木.png", "word": "き", "en-word": "tree"},
+	#{"voice": "res://Voice/八.wav", "image": "res://Art/八.png", "word": "はち", "en-word": "eight"},
+	#{"voice": "res://Voice/食べる.wav", "image": "res://Art/食べる.png", "word": "たべる", "en-word": "to eat"},
 	
-	{"voice": "res://Voice/水.wav", "image": "res://Art/水.png", "word": "みず", "en-word": "water"},
-	{"voice": "res://Voice/天の.wav", "image": "res://Art/天の.png", "word": "あめの", "en-word": "heavenly"},
-	{"voice": "res://Voice/水.wav", "image": "res://Art/水.png", "word": "みず", "en-word": "water"},
-	{"voice": "res://Voice/八.wav", "image": "res://Art/八.png", "word": "はち", "en-word": "eight"},
-	{"voice": "res://Voice/食べる.wav", "image": "res://Art/食べる.png", "word": "たべる", "en-word": "to eat"}
+	{"voice": "res://Voice/円.wav", "image": "res://Art/円.png", "word": "えん", "en-word": "money"},
+	{"voice": "res://Voice/六.wav", "image": "res://Art/六.png", "word": "ろく", "en-word": "six"},
+	{"voice": "res://Voice/万.wav", "image": "res://Art/万.png", "word": "まん", "en-word": "ten thousand"},
+	{"voice": "res://Voice/白.wav", "image": "res://Art/白.png", "word": "しろ", "en-word": "white"},
+	{"voice": "res://Voice/七.wav", "image": "res://Art/七.png", "word": "なな", "en-word": "seven"},
 ]
