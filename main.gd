@@ -17,12 +17,14 @@ var save_path = "user://progress.save"
 var tries = 0
 var index = 0
 var hint = ""
+# Card with the highest number of errors
 var highest_error = 0
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	load_progress()
 	save_progress()
+	# Initialize the card with the highest error
 	load_flashcard(highest_error)
 	debug_save()
 	input_field.call_deferred("grab_focus")
@@ -34,8 +36,7 @@ func save_progress():
 	if file:
 		file.store_var(progress)
 		file.close()
-		print("Progress saved!")
-		
+		print("Progress saved!")		
 
 func load_progress():
 	if FileAccess.file_exists(save_path):
@@ -46,6 +47,7 @@ func load_progress():
 	else:
 		progress = {}
 
+# Inspects and prints the contents of the saved data file in Godot
 func debug_save():
 	if FileAccess.file_exists(save_path):
 		var file = FileAccess.open(save_path, FileAccess.READ)
@@ -57,39 +59,45 @@ func debug_save():
 
 # Loads flashcard into the screen
 func load_flashcard(i):
-	#For debugging only
+	# For printing the current save state, useful for debugging
 	print("Current save state: ", progress)
-	
-	input_field.keep_editing_on_text_submit = true # keeps focus in window
+	# keeps focus in window
+	input_field.keep_editing_on_text_submit = true 
 	image_display.texture = load(flashcards.flashdict[i]["image"])
 	current_word = flashcards.flashdict[i]["word"]
 	input_field.text = ""
 	feedback_label.text = ""
-
-	load_flashcard_index()
-	
+	load_flashcard_index()	
+	# English hint system
 	english_word.set_text(flashcards.flashdict[i]["en-word"])
+	# Audio/Voices
 	audio_stream.stream = AudioStreamWAV.load_from_file(flashcards.flashdict[i]["voice"])
-	
 	audio_stream.play()
 	
-# Indexes all the cards into save progress
+# Indexes all the cards into save progress. Goes through the entire list of words, and tries to "get".
+# Get gets nothing, so therefore it sets the value to 0 because of the parameter
 func load_flashcard_index():
 	for i in flashcards.flashdict.size():
 		progress[i] = progress.get(current_word, 0)
 
+# When the player hits enter
 func _on_text_submitted(text: String):
+	# Checking if text is correct
 	if text == current_word:
+		# Clever way to index around the whole index without going past the indexer
 		index = (index + 1) % flashcards.flashdict.size()
-		save_progress() #save to file
+		save_progress()
 		feedback_label.text = "✅ Correct!"
 		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # green
 		
+		# If highest error is equal to 0; to avoid reloading same card we randomize
 		if progress.values().max() == 0:
 			highest_error = rng.randi_range(0, progress.size() - 1)
 		
+		# Load the card with the highest error because we want to repeat that card till the player
+		# gets it right
 		load_flashcard(highest_error)
-		tries = 0 # tries before hint system kicks in
+		tries = 0 # indexer and when greater than 0 hint system kicks in
 		hint = "" # hint set back to blank
 		highest_error = 0
 
@@ -109,6 +117,7 @@ func _on_text_submitted(text: String):
 		print(hint)
 		input_field.text = hint
 
+# Resets the file system on reset 
 func _on_reset_button_pressed() -> void:
 	if FileAccess.file_exists(save_path):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
