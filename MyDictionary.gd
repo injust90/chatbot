@@ -33,9 +33,13 @@ class_name FlashcardsDictionary
 	#{"voice": "res://Voice/やま.wav", "image": "res://Art/やま.png", "word": "やま", "en-word": "mountain"},
 	#{"voice": "res://Voice/たかい.wav", "image": "res://Art/たかい.png", "word": "たかい", "en-word": "high"},
 	#{"voice": "res://Voice/いま.wav", "image": "res://Art/いま.png", "word": "いま", "en-word": "now"},
-	#{"voice": "res://Voice/かく.wav", "image": "res://Art/かく.png", "word": "かく", "en-word": "write"},
+	#{"voice": "res://Voice/かく.wav", "image": "res://Art/かく.png", "word": "かく", "en-word": "write"},	
+	#{"voice": "res://Voice/五.wav", "image": "res://Art/五.png", "word": "ご", "en-word": "five"},
+	#{"voice": "res://Voice/お金.wav", "image": "res://Art/お金.png", "word": "おかね", "en-word": "money"},
+	#{"voice": "res://Voice/名前.wav", "image": "res://Art/名前.png", "word": "なまえ", "en-word": "name"},
 	
-	{"voice": "res://Voice/五.wav", "image": "res://Art/五.png", "word": "ご", "en-word": "five"},
-	{"voice": "res://Voice/お金.wav", "image": "res://Art/お金.png", "word": "おかね", "en-word": "money"},
-	{"voice": "res://Voice/名前.wav", "image": "res://Art/名前.png", "word": "なまえ", "en-word": "name"},
+	{"voice": "res://Voice/先生.wav", "image": "res://Art/先生.png", "word": "せんせい", "en-word": "teacher"},
+	{"voice": "res://Voice/四.wav", "image": "res://Art/四.png", "word": "よん", "en-word": "four"},
+	{"voice": "res://Voice/外国.wav", "image": "res://Art/外国.png", "word": "がいこく", "en-word": "country"},
+	{"voice": "res://Voice/男の子.wav", "image": "res://Art/男の子.png", "word": "おとこのこ", "en-word": "country"},
 ]
