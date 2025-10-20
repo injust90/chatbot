@@ -90,16 +90,20 @@ func _on_text_submitted(text: String):
 		feedback_label.text = "✅ Correct!"
 		feedback_label.add_theme_color_override("font_color", Color(0, 1, 0))  # green
 		
-		# If highest error is equal to 0; to avoid reloading same card we randomize
+		# If highest error value is equal to 0; to avoid reloading same card we randomize
 		if progress.values().max() == 0:
 			highest_error = rng.randi_range(0, progress.size() - 1)
-		
+			# Index set to current key/index so it doesn't overflow
+			index = highest_error
+			
+		load_flashcard(index)
 		# Load the card with the highest error because we want to repeat that card till the player
 		# gets it right
-		load_flashcard(highest_error)
 		tries = 0 # indexer and when greater than 0 hint system kicks in
 		hint = "" # hint set back to blank
 		highest_error = 0
+		
+		print ("index ", index)
 
 	else:
 		progress[highest_error] += 1
@@ -112,7 +116,7 @@ func _on_text_submitted(text: String):
 
 	if tries > 0:
 		var hint_letter = ""
-		hint_letter = flashcards.flashdict[highest_error]["word"][tries - 1]
+		hint_letter = flashcards.flashdict[index]["word"][tries - 1]
 		hint += hint_letter
 		print(hint)
 		input_field.text = hint
